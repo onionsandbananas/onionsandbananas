@@ -36,6 +36,7 @@ public class BookController {
 	  @RequestMapping("/order")
 	  public String order(Model theModel, @RequestParam String order) {
 			List<Book> books = bookListDao.getByOrder(order);
+			
 			theModel.addAttribute("books", books);
 			return "book_list";		  
 	  }

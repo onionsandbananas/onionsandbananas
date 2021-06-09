@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 @Table(name="books")
 public class Book {
@@ -24,8 +26,9 @@ public class Book {
 	@Column(name="year")
 	private int year;
 	
-	@Column(name="status")
-	private String status;
+	@Column(name="accesible", columnDefinition = "TINYINT")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private boolean status;
 
 	public int getId() {
 		return id;
@@ -59,11 +62,11 @@ public class Book {
 		this.year = year;
 	}
 
-	public String getStatus() {
+	public boolean getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 	

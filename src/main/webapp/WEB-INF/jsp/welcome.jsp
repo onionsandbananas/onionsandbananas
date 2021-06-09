@@ -7,6 +7,6 @@
 <body>
     <h2>Biblioteka</h2>
     <a href="book_list/all">Lista książek"</a>
-    <a href="hello">test"</a>
+    <a href="userHistory">Historia wypożyczeń"</a>
 </body>
 </html>

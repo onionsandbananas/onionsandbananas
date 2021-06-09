@@ -36,7 +36,7 @@
 	<th>
 	<form action = "order" method="POST">
 			<input type="hidden" name="order" value="status">
-         <input type = "submit" value = "Status"/>
+         <input type = "submit" value = "Dostępna"/>
      </form>
 	</th>
 	<c:forEach items="${books}" var="book">
@@ -44,7 +44,16 @@
         <td>${book.title}</td>
         <td>${book.author}</td>
         <td>${book.year}</td>
-        <td>${book.status}</td>
+        <td>
+        <c:choose>
+		  <c:when test="${book.status eq true}">
+			Tak
+		  </c:when>
+		  <c:when test="${book.status eq false}">
+			Nie
+		  </c:when>
+		  </c:choose>
+        </td>
     </tr>
 	</c:forEach>
 </table>

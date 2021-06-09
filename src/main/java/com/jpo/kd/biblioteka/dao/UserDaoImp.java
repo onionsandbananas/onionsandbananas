@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jpo.kd.biblioteka.entity.Book;
+import com.jpo.kd.biblioteka.entity.Borrow;
 import com.jpo.kd.biblioteka.entity.User;
 
 @Repository
@@ -24,8 +25,40 @@ public class UserDaoImp implements UserDao {
 		try {
 			User user = theQuery.getSingleResult();
 		}catch(Exception e) {
-			 return false;
+			currentSession.close();
+			return false;
 		}
+		currentSession.close();
 		return true;
+	}
+
+	@Override
+	public List<Borrow> getHistory(int id) {
+		Session currentSession = sessionFactory.openSession();
+		Query<Borrow> theQuery = 
+				currentSession.createQuery("from Borrow where userID="+id+"", Borrow.class);
+		List<Borrow> borrow = theQuery.getResultList();
+		currentSession.close();
+		return borrow;
+	}
+
+	@Override
+	public List<User> getAllUsers() {
+		Session currentSession = sessionFactory.openSession();
+		Query<User> theQuery = 
+				currentSession.createQuery("from User", User.class);
+		List<User> users = theQuery.getResultList();
+		currentSession.close();
+		return users;
+	}
+
+	@Override
+	public int uiToId(int ui) {
+		Session currentSession = sessionFactory.openSession();
+		Query<User> theQuery = currentSession.createQuery("from User where ui="+ui, User.class);
+		User user = theQuery.getSingleResult();
+		currentSession.close();
+		
+		return user.getId();
 	}
 }

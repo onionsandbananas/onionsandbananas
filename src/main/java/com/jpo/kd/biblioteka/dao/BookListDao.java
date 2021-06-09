@@ -11,4 +11,6 @@ public interface BookListDao {
 	public List<Book> getBooksByTitle(String title);
 
 	public List<Book> getByOrder(String order);
+	
+	public Book getBook(int id);
 }

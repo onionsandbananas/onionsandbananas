@@ -22,6 +22,7 @@ public class BookListDaoImp implements BookListDao {
 		Query<Book> theQuery = 
 				currentSession.createQuery("from Book", Book.class);
 		List<Book> books = theQuery.getResultList();
+		currentSession.close();
 		return books;
 	}
 
@@ -31,6 +32,7 @@ public class BookListDaoImp implements BookListDao {
 		Query<Book> theQuery = 
 				currentSession.createQuery("from Book where title like'%"+title+"%'", Book.class);
 		List<Book> books = theQuery.getResultList();
+		currentSession.close();
 		return books;
 	}
 
@@ -40,7 +42,18 @@ public class BookListDaoImp implements BookListDao {
 		Query<Book> theQuery = 
 				currentSession.createQuery("from Book order by "+order, Book.class);
 		List<Book> books = theQuery.getResultList();
+		currentSession.close();
 		return books;
+	}
+
+	@Override
+	public Book getBook(int id){
+		Session currentSession = sessionFactory.openSession();
+		Query<Book> theQuery =
+				currentSession.createQuery("from Book where id="+id+"", Book.class);
+		Book book = theQuery.getSingleResult();
+		currentSession.close();
+		return book;
 	}
 
 }
