@@ -4,12 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link type="text/css" rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
 <table>
 	<c:forEach items="${users}" var="user">
-    <tr>      
+    <tr>
         <td>${user.id}</td>
         <td>${user.ui}</td>
         <td>${user.role}</td>
