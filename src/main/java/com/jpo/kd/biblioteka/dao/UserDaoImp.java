@@ -61,4 +61,24 @@ public class UserDaoImp implements UserDao {
 		
 		return user.getId();
 	}
+
+	@Override
+	public User getUser(int ui) {
+		Session currentSession = sessionFactory.openSession();
+		Query<User> theQuery = 
+				currentSession.createQuery("from User where ui="+ui, User.class);
+		User user = theQuery.getSingleResult();
+		currentSession.close();
+		return user;
+	}
+
+	@Override
+	public List<User> allUsersByRole() {
+		Session currentSession = sessionFactory.openSession();
+		Query<User> theQuery = 
+				currentSession.createQuery("from User order by role", User.class);
+		List<User> users = theQuery.getResultList();
+		currentSession.close();
+		return users;
+	}
 }

@@ -7,7 +7,6 @@
 <link type="text/css" rel="stylesheet" href="http://localhost:8080/css/style.css" />
 </head>
 <body>
-
 	<header>
 		<h2>Spis książek</h2>
 	</header>
@@ -53,18 +52,23 @@
 		        <td>${book.author}</td>
 		        <td>${book.year}</td>
 		        <td>
-		        <c:choose>
-				  <c:when test="${book.status eq true}">
-					Tak
-				  </c:when>
-				  <c:when test="${book.status eq false}">
-					Nie
-				  </c:when>
-				  </c:choose>
+			        <c:choose>
+					  <c:when test="${book.status eq true}">
+						Tak
+					  </c:when>
+					  <c:when test="${book.status eq false}">
+						Nie
+					  </c:when>
+					</c:choose>
 		        </td>
 		    </tr>
 			</c:forEach>
 		</table>
-</section>
+	</section>
+	<br/>
+	<br/>
+	<nav>
+		<a href="/welcome">Wróć</a>
+	</nav>
 </body>
 </html>

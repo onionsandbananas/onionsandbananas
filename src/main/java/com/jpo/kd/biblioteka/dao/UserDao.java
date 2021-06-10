@@ -19,4 +19,8 @@ public interface UserDao {
 	public List<User> getAllUsers();
 	
 	public int uiToId(int ui);
+	
+	public User getUser(int id);
+	
+	public List<User> allUsersByRole();
 }

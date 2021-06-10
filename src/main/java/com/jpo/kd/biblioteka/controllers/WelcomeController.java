@@ -28,7 +28,7 @@ public class WelcomeController {
 	public String login_check(@ModelAttribute("login") String login, @ModelAttribute("password") String password) {
 		
 		if(userDao.authorize(login, password)) {
-			return "welcome_set";
+			return "welcome";
 		}
 		return "login";
 	}

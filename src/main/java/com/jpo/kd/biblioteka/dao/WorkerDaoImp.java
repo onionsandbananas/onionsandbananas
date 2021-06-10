@@ -20,6 +20,24 @@ public class WorkerDaoImp implements WorkerDao {
 	
 	@Override
 	@Transactional
+	public boolean updateDate(String newDate, int bookId) {
+		Session currentSession = sessionFactory.openSession();
+		try {
+		currentSession.beginTransaction();
+		currentSession.createQuery("update Borrow set date='"+newDate+"' where bookID="+bookId).executeUpdate();
+		}catch(Exception e) {
+			currentSession.getTransaction().commit();
+			currentSession.close();
+			return false;
+		}
+		currentSession.getTransaction().commit();
+		currentSession.close();
+
+		return true;
+	}
+	
+	@Override
+	@Transactional
 	public boolean saveBorrow(int bookId, int ui, String date) {
 		Session currentSession = sessionFactory.openSession();
 		try {
@@ -44,5 +62,5 @@ public class WorkerDaoImp implements WorkerDao {
 
 		return true;
 	}
-
+	
 }

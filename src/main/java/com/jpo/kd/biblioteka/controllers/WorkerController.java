@@ -35,11 +35,11 @@ public class WorkerController {
 	  public String workerPanel(Model theModel) {
 		  //TODO system wypozyczen, przedluzanie daty
 		
-		  //TODO lista uzytkownikow wg ui z mozliwoscia sprawdzenia historii
 		 List<User> users = userDao.getAllUsers();
 		
 		 List<Book> bookList = bookDao.getBooks();
 		
+		 theModel.addAttribute("bBooks", bookDao.getBorrow());
 		 theModel.addAttribute("users", users);
 		 theModel.addAttribute("book", bookList);
 		 return "workerPanel";
@@ -58,6 +58,20 @@ public class WorkerController {
 		theModel.addAttribute("borrow", borrow);
 		theModel.addAttribute("ui", ui);
 		return "userHistory";
+	}
+	
+	@RequestMapping("/changeDate")
+	public String changeDate(Model theModel, @RequestParam("newDate") String newDate,  @RequestParam("bookId") int bookId) {
+	    if(!checkRegex(
+	    		"^((19|2[0-9])[0-9]{2})-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
+	    		newDate
+	    		)) {
+	    	theModel.addAttribute("errDate2","Zły format daty");
+	    }
+	    if(!workerDao.updateDate(newDate, bookId)) {
+	    	theModel.addAttribute("err2","Błąd");
+	    }
+		return "workerPanel";
 	}
 	
 	@RequestMapping("/save")

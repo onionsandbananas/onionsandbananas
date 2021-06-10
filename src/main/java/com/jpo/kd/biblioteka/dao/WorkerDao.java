@@ -6,4 +6,5 @@ public interface WorkerDao {
 	public boolean saveBorrow(int bookId,
 			int ui,
 			String date);
+	public boolean updateDate(String newDate, int bookId);
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jpo.kd.biblioteka.entity.Book;
+import com.jpo.kd.biblioteka.entity.Borrow;
 
 @Repository
 public class BookListDaoImp implements BookListDao {
@@ -55,5 +56,17 @@ public class BookListDaoImp implements BookListDao {
 		currentSession.close();
 		return book;
 	}
+
+	@Override
+	public List<Borrow> getBorrow() {
+		Session currentSession = sessionFactory.openSession();
+		Query<Borrow> theQuery = 
+				currentSession.createQuery("from Borrow", Borrow.class);
+		List<Borrow> books = theQuery.getResultList();
+		currentSession.close();
+		return books;
+	}
+
+
 
 }

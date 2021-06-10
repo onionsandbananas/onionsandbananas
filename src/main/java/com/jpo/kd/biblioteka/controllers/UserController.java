@@ -28,7 +28,9 @@ public class UserController {
 			
 			for(Borrow loopBorrow:borrow) {
 				bookList.add(bookDao.getBook(loopBorrow.getBookID()));
+				
 			}
+			
 			theModel.addAttribute("book", bookList);
 			theModel.addAttribute("borrow", borrow);
 			return "userHistory";

@@ -17,8 +17,19 @@ public class AdminDaoImp implements AdminDao {
 	
 	@Override
 	public boolean deleteUser(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		Session currentSession = sessionFactory.openSession();
+		try {
+		currentSession.beginTransaction();
+		currentSession.createQuery("delete from User where id="+id).executeUpdate();
+		
+		}catch(Exception e) {
+			currentSession.getTransaction().commit();
+			currentSession.close();
+			return false;
+		}
+		currentSession.getTransaction().commit();
+		currentSession.close();
+		return true;
 	}
 
 	@Override
